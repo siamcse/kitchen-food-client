@@ -20,7 +20,7 @@ const Navbar = () => {
         {user?.email ?
             <>
                 <li><Link to='/addservices'>Add Services</Link></li>
-                <li><Link to='/'>My Reviews</Link></li>
+                <li><Link to='/myreviews'>My Reviews</Link></li>
                 <li><button onClick={handleLogOut}>LogOut</button></li>
             </>
             :
@@ -39,7 +39,7 @@ const Navbar = () => {
                         {menuItem}
                     </ul>
                 </div>
-                <Link className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                <Link className="btn btn-ghost normal-case text-xl">Kitchen Food</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">

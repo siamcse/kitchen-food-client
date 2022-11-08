@@ -1,9 +1,14 @@
 import { Rating } from '@mui/material';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
+import AddReviews from './Reviews/AddReviews';
+import ShowReviews from './Reviews/ShowReviews';
 
 const ServiceDetails = () => {
-    const { title, image, price, rating, description } = useLoaderData();
+    const { user } = useContext(AuthContext);
+    const [refresh, setRefresh] = useState(true);
+    const { _id, title, image, price, rating, description } = useLoaderData();
 
     return (
         <div className='w-3/4 mx-auto my-12'>
@@ -23,6 +28,16 @@ const ServiceDetails = () => {
                 </div>
             </div>
             <h2 className='text-4xl font-semibold my-6'>Service Reviews</h2>
+            <div>
+                <ShowReviews id={_id} refresh={refresh}></ShowReviews>
+                {
+                    user?.email && <AddReviews
+                        id={_id}
+                        setRefresh={setRefresh}
+                        refresh={refresh}
+                    ></AddReviews>
+                }
+            </div>
         </div>
     );
 };

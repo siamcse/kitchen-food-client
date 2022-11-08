@@ -1,4 +1,3 @@
-import { Alert, AlertTitle } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2'
@@ -58,9 +57,9 @@ const AddServices = () => {
                 </div>
                     <div>
                         <label className="label">
-                            <span className="label-text">PhotoURL</span>
+                            <span className="label-text">Description</span>
                         </label>
-                        <textarea className="input input-bordered w-full h-24" placeholder='PhotoURL' {...register("description", { required: true })} />
+                    <textarea className="input input-bordered w-full h-24" placeholder='Description' {...register("description", { required: true })} />
                     </div>
 
 
