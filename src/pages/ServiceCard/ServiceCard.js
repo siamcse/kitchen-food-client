@@ -1,10 +1,18 @@
+import { Rating } from '@mui/material';
 import React from 'react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import { Link } from 'react-router-dom';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceCard = ({ service }) => {
-    const { image, title, price, description, rating } = service;
+    const { _id, image, title, price, description, rating } = service;
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
-            <figure><img className='w-full h-80' src={image} alt="Shoes" /></figure>
+        <div className="card w-96 bg-base-100 border-4 shadow-xl">
+            <PhotoProvider>
+                <PhotoView src={image}>
+                    <img className='w-full h-80' src={image} style={{ objectFit: 'cover' }} alt="" />
+                </PhotoView>
+            </PhotoProvider>
             <div className="card-body">
                 <h2 className="card-title">
                     {title}
@@ -13,12 +21,17 @@ const ServiceCard = ({ service }) => {
                 <p>Price: {price} Tk</p>
                 <p>
                     {
-                        description.length>100 ? description.slice(0,100)+"...": description
+                        description.length > 100 ? description.slice(0, 100) + "..." : description
                     }
                 </p>
-                <div className="card-actions justify-between">
-                    <div className="badge badge-outline">Fashion</div>
-                    <div className="badge badge-outline">Products</div>
+                <div className="card-actions justify-between items-center">
+                    <div className="flex gap-1">
+                        <Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly />
+                        <p>{rating}</p>
+                    </div>
+                    <div className="">
+                        <Link to={`/services/${_id}`} className='btn btn-secondary btn-sm'>Details</Link>
+                    </div>
                 </div>
             </div>
         </div>
