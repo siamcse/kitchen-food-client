@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 
     const menuItem = <>
-    <li><Link>Home</Link></li>
+    <li><Link to='/'>Home</Link></li>
+    <li><Link to='/login'>Login</Link></li>
     </>
 
     return (
@@ -26,7 +27,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link className="btn bg-cyan-500 hover:bg-cyan-600">Get started</Link>
+                <Link to='/register' className="btn bg-cyan-500 hover:bg-cyan-600">Register</Link>
             </div>
         </div>
     );
