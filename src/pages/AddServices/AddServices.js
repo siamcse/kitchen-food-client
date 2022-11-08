@@ -1,6 +1,7 @@
 import { Alert, AlertTitle } from '@mui/material';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2'
 
 const AddServices = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -18,10 +19,11 @@ const AddServices = () => {
             .then(data => {
                 console.log(data);
                 if (data.acknowledged){
-                    <Alert severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        Your service successfully added.
-                    </Alert>
+                    Swal.fire(
+                        'Good job!',
+                        'Service added Successfully!',
+                        'success'
+                    )
                 }
             })
     };
