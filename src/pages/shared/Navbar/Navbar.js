@@ -15,6 +15,7 @@ const Navbar = () => {
 
     const menuItem = <>
         <li><Link to='/'>Home</Link></li>
+        <li><Link to='/services'>Services</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
         {user?.email ?
             <>
@@ -46,7 +47,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/register' className="btn bg-cyan-500 hover:bg-cyan-600">Register</Link>
+                <Link to='/register' className="btn btn-primary ">Register</Link>
             </div>
         </div>
     );
