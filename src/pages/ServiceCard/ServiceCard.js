@@ -26,8 +26,8 @@ const ServiceCard = ({ service }) => {
                 </p>
                 <div className="card-actions justify-between items-center">
                     <div className="flex gap-1">
-                        <Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly />
-                        <p>{rating}</p>
+                        <Rating name="half-rating-read" defaultValue={Number(rating)} precision={0.5} readOnly />
+                        <p>{Number(rating)}</p>
                     </div>
                     <div className="">
                         <Link to={`/services/${_id}`} className='btn btn-secondary btn-sm'>Details</Link>

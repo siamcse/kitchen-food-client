@@ -7,9 +7,9 @@ const ServiceDetails = () => {
 
     return (
         <div className='w-3/4 mx-auto my-12'>
-            <h2 className='text-4xl text-center font-semibold my-6'>Service</h2>
+            <h2 className='text-4xl font-semibold my-6'>Service</h2>
             <div className="grid md:grid-cols-2 bg-base-100 shadow-xl">
-                <figure><img className='w-full h-96' src={image} alt="Album" /></figure>
+                <figure><img className='w-full h-96 rounded-md' src={image} alt="Album" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{title}</h2>
                     <p>{description}</p>
@@ -22,7 +22,7 @@ const ServiceDetails = () => {
                     </div>
                 </div>
             </div>
-            <h2 className='text-4xl text-center font-semibold my-6'>Service Reviews</h2>
+            <h2 className='text-4xl font-semibold my-6'>Service Reviews</h2>
         </div>
     );
 };

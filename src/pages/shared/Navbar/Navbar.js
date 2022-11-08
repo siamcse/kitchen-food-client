@@ -19,7 +19,7 @@ const Navbar = () => {
         <li><Link to='/blog'>Blog</Link></li>
         {user?.email ?
             <>
-                <li><Link to='/'>Add Reviews</Link></li>
+                <li><Link to='/addservices'>Add Services</Link></li>
                 <li><Link to='/'>My Reviews</Link></li>
                 <li><button onClick={handleLogOut}>LogOut</button></li>
             </>
