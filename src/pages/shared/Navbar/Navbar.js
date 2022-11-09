@@ -1,16 +1,18 @@
+import { Tooltip } from '@mui/material';
 import React, { useContext } from 'react';
+import { FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
 
-    const handleLogOut=()=>{
+    const handleLogOut = () => {
         logOut()
-        .then(()=>{
-            localStorage.removeItem('kitchen-token');
-        })
-        .catch(e=>console.error(e))
+            .then(() => {
+                localStorage.removeItem('kitchen-token');
+            })
+            .catch(e => console.error(e))
     }
 
     const menuItem = <>
@@ -19,9 +21,9 @@ const Navbar = () => {
         <li><Link to='/blog'>Blog</Link></li>
         {user?.email ?
             <>
-                <li><Link to='/addservices'>Add Services</Link></li>
+                <li><Link to='/addservices'>Add Service</Link></li>
                 <li><Link to='/myreviews'>My Reviews</Link></li>
-                <li><button onClick={handleLogOut}>LogOut</button></li>
+                <li><button className='btn btn-ghost md:hidden block' onClick={handleLogOut}>Log Out</button></li>
             </>
             :
             <li><Link to='/login'>Login</Link></li>
@@ -47,7 +49,19 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/register' className="btn btn-secondary ">Register</Link>
+                {
+                    user?.email ? <div className='flex flex-col md:flex-row md:gap-1 items-center'>
+                        {
+                            user.photoURL ?
+                                <img className='w-12 rounded-full' src={user.photoURL} alt="" title={user?.displayName} />
+                            :
+                                <FaUserAlt className='text-4xl border-2 p-1 rounded-full' title={user?.displayName}></FaUserAlt>
+                        }
+                        <p><button className='btn btn-ghost hidden md:block' onClick={handleLogOut}>Log Out</button></p>
+                    </div>
+                        :
+                        <Link to='/register' className="btn btn-secondary ">Register</Link>
+                }
             </div>
         </div>
     );
