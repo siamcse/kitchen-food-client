@@ -16,7 +16,7 @@ const ReviewsRow = ({ review, handleDelete }) => {
         <tr>
             <th>
                 <label>
-                    <Link to={`/review/${_id}`}><FaEdit className='text-2xl'></FaEdit></Link>
+                    <Link to={`/review/${_id}`}><FaEdit className='text-2xl transform hover:scale-90'></FaEdit></Link>
                 </label>
             </th>
             <td>
@@ -39,14 +39,14 @@ const ReviewsRow = ({ review, handleDelete }) => {
                 </div>
             </td>
             <td>
-                {service.title}
+                <Link className='hover:bg-secondary hover:text-white rounded-lg p-1' to={`/services/${service._id}`}>{service.title}</Link>
             </td>
             <td>{rating}</td>
             <td>
-                <button className="btn btn-ghost btn-xs">{comment}</button>
+                <p>{comment}</p>
             </td>
             <th>
-                <button onClick={() => handleDelete(_id)}><RiDeleteBin6Line className='text-2xl text-red-500'></RiDeleteBin6Line></button>
+                <button onClick={() => handleDelete(_id)}><RiDeleteBin6Line className='text-2xl text-red-500 transform hover:scale-90'></RiDeleteBin6Line></button>
             </th>
         </tr>
     );

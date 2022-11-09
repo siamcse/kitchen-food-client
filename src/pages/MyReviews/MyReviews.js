@@ -8,12 +8,14 @@ const Reviews = () => {
     const { user } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState([]);
     const [refresh, setRefresh] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch(`http://localhost:5000/reviews?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setMyReviews(data);
+                setLoading(false);
             })
     }, [user?.email, refresh])
 
@@ -27,7 +29,8 @@ const Reviews = () => {
                 console.log(data);
                 if (data.acknowledged) {
                     setRefresh(!refresh);
-                    toast.success('Successfully deleted!')
+                    toast.success('Successfully deleted!');
+                    setLoading(false);
                 }
             })
     }
@@ -35,7 +38,14 @@ const Reviews = () => {
 
     return (
         <div className='max-w-screen-xl mx-auto mb-12'>
-            <h2 className='text-4xl font-bold text-center my-12' > My Reviews: {myReviews.length}</h2>
+
+            {
+                loading ? <div className='flex justify-center items-center h-96'>
+                    <p className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></p>
+                </div>
+                    :
+                    <h2 className='text-4xl font-bold text-center my-12' > My Reviews: {myReviews.length}</h2>
+            }
 
             {
                 myReviews.length > 0 ?
@@ -45,7 +55,7 @@ const Reviews = () => {
                                 <tr>
                                     <th>Edit</th>
                                     <th>Name</th>
-                                    <th>Service Id</th>
+                                    <th>Service</th>
                                     <th>Rating</th>
                                     <th>Comment</th>
                                     <th>Delete</th>
