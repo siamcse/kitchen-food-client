@@ -10,7 +10,7 @@ const Review = ({ review }) => {
                 image ?
                     <img className='w-24 rounded-full ' src={image} alt="" />
                     :
-                    <FaUserAlt className='text-6xl border-2 rounded-full '></FaUserAlt>
+                    <FaUserAlt className='text-6xl p-1 border-2 rounded-full '></FaUserAlt>
                     
             }
             <div>
