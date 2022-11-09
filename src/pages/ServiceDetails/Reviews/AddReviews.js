@@ -18,7 +18,8 @@ const AddReviews = ({ id, setRefresh,refresh }) => {
         fetch(`http://localhost:5000/reviews`, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
             },
             body: JSON.stringify(newReview)
         })

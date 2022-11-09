@@ -2,6 +2,7 @@ import { Rating } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useTitle from '../../hooks/UseTitle';
 import AddReviews from './Reviews/AddReviews';
 import ShowReviews from './Reviews/ShowReviews';
 
@@ -9,6 +10,7 @@ const ServiceDetails = () => {
     const { user } = useContext(AuthContext);
     const [refresh, setRefresh] = useState(true);
     const { _id, title, image, price, rating, description } = useLoaderData();
+    useTitle('Details');
 
     return (
         <div className='w-3/4 mx-auto my-12'>

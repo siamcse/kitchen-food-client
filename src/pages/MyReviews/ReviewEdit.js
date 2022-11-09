@@ -12,7 +12,8 @@ const ReviewEdit = () => {
         fetch(`http://localhost:5000/review/${_id}`,{
             method: 'PATCH',
             headers:{
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
             },
             body: JSON.stringify(data)
         })

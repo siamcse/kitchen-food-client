@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useTitle from '../../../hooks/UseTitle';
 import ServiceCard from '../../ServiceCard/ServiceCard';
 import Banner from '../Banner/Banner';
 
 const Home = () => {
     const [services, setServices] = useState([]);
+    useTitle('Home')
     const size = 3;
 
     useEffect(() => {

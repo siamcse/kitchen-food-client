@@ -8,7 +8,7 @@ const Navbar = () => {
     const handleLogOut=()=>{
         logOut()
         .then(()=>{
-
+            localStorage.removeItem('kitchen-token');
         })
         .catch(e=>console.error(e))
     }

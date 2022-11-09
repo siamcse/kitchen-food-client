@@ -1,28 +1,41 @@
-import { Alert } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthProvider';
+import useTitle from '../../hooks/UseTitle';
 import ReviewsRow from './ReviewsRow';
 
 const Reviews = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState([]);
     const [refresh, setRefresh] = useState(true);
     const [loading, setLoading] = useState(true);
+    useTitle('My Reviews')
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-            .then(res => res.json())
+        fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
+            }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    return logOut();
+                }
+                return res.json();
+            })
             .then(data => {
                 setMyReviews(data);
                 setLoading(false);
             })
-    }, [user?.email, refresh])
+    }, [user?.email, refresh, logOut])
 
     const handleDelete = id => {
         console.log(id);
         fetch(`http://localhost:5000/reviews/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -77,7 +90,6 @@ const Reviews = () => {
                         <h2 className="text-4xl">No reviews were added</h2>
                     </div>
             }
-
         </div >
     );
 };

@@ -1,16 +1,19 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2'
+import useTitle from '../../hooks/UseTitle';
 
 const AddServices = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    useTitle('Add Service');
 
     const onSubmit = data => {
         console.log(data);
         fetch(`http://localhost:5000/services`,{
             method:'POST',
             headers:{
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
             },
             body: JSON.stringify(data)
         })

@@ -2,12 +2,14 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useTitle from '../../hooks/UseTitle';
 
 const Login = () => {
     const { signIn, popupSignIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
     const location = useLocation();
     const navigate = useNavigate();
+    useTitle('Login')
 
     const from = location.state?.from?.pathname || '/';
 
@@ -17,13 +19,29 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log( email, password);
 
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                navigate(from, {replace:true});
+                const currentUser ={
+                    email: user.email
+                }
+                console.log(currentUser);
+
+                fetch('http://localhost:5000/jwt',{
+                    method: 'POST',
+                    headers:{
+                        'content-type':'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    console.log(data);
+                    localStorage.setItem('kitchen-token',data.token);
+                    navigate(from, {replace:true});
+                })
+
             })
             .catch(e => console.error(e))
     }
@@ -52,7 +70,7 @@ const Login = () => {
                             <Link to='' rel="noopener noreferrer">Forgot Password?</Link>
                         </div>
                     </div>
-                    <button type='submit' className="block w-full p-3 text-center rounded-md text-white bg-cyan-600 hover:bg-cyan-700">Sign in</button>
+                    <button type='submit' className="block w-full p-3 text-center rounded-md text-white btn-secondary">Sign in</button>
                 </form>
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
