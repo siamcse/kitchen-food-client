@@ -54,7 +54,7 @@ const AddReviews = ({ id, setRefresh,refresh }) => {
                         <label className="label">
                             <span className="label-text">PhotoURL</span>
                         </label>
-                        <input className="input input-bordered w-full lg:max-w-xl" placeholder='PhotoURL' {...register("image", { required: true })} />
+                        <input className="input input-bordered w-full lg:max-w-xl" placeholder='PhotoURL' {...register("image")} />
                     </div>
                 </div>
                 <div>

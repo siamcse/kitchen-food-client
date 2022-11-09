@@ -1,6 +1,6 @@
 import { Rating } from '@mui/material';
 import React, { useContext, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import AddReviews from './Reviews/AddReviews';
 import ShowReviews from './Reviews/ShowReviews';
@@ -17,6 +17,7 @@ const ServiceDetails = () => {
                 <figure><img className='w-full h-96 rounded-md' src={image} alt="Album" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{title}</h2>
+                    <p>Price: {price}Tk</p>
                     <p>{description}</p>
                     <div className="card-actions justify-between">
                         <div className="flex gap-1">
@@ -31,11 +32,13 @@ const ServiceDetails = () => {
             <div>
                 <ShowReviews id={_id} refresh={refresh}></ShowReviews>
                 {
-                    user?.email && <AddReviews
+                    user?.email ? <AddReviews
                         id={_id}
                         setRefresh={setRefresh}
                         refresh={refresh}
                     ></AddReviews>
+                    :
+                    <p className='link underline text-xl'><Link to='/login'>Please Login first for review.</Link></p>
                 }
             </div>
         </div>
