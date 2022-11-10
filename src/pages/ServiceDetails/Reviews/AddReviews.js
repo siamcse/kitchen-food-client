@@ -12,7 +12,7 @@ const AddReviews = ({ id, setRefresh, refresh }) => {
         let newReview = { ...data };
         newReview['email'] = email;
         newReview['serviceId'] = id;
-        setRefresh(!refresh)
+        
 
         fetch(`https://kitchen-food-server-siamcse.vercel.app/reviews`, {
             method: 'POST',
@@ -30,6 +30,7 @@ const AddReviews = ({ id, setRefresh, refresh }) => {
                         'Review added Successfully!',
                         'success'
                     )
+                    setRefresh(!refresh);
                 }
             })
     };
