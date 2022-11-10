@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../context/AuthProvider';
 
-const AddReviews = ({ id, setRefresh,refresh }) => {
+const AddReviews = ({ id, setRefresh, refresh }) => {
     const { user } = useContext(AuthContext);
     const { register, handleSubmit, } = useForm();
 
@@ -12,10 +12,9 @@ const AddReviews = ({ id, setRefresh,refresh }) => {
         let newReview = { ...data };
         newReview['email'] = email;
         newReview['serviceId'] = id;
-        console.log(newReview);
         setRefresh(!refresh)
 
-        fetch(`http://localhost:5000/reviews`, {
+        fetch(`https://kitchen-food-server-siamcse.vercel.app/reviews`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -25,10 +24,9 @@ const AddReviews = ({ id, setRefresh,refresh }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.acknowledged) {
                     Swal.fire(
-                        'Good job!',
+                        'Good!',
                         'Review added Successfully!',
                         'success'
                     )
@@ -49,7 +47,7 @@ const AddReviews = ({ id, setRefresh,refresh }) => {
                         <label className="label">
                             <span className="label-text">Rating</span>
                         </label>
-                        <input className="input input-bordered w-full lg:max-w-xl" placeholder='Rating' {...register("rating")} />
+                        <input className="input input-bordered w-full lg:max-w-xl" placeholder='Rating (Out of 5)' {...register("rating")} />
                     </div>
                     <div>
                         <label className="label">

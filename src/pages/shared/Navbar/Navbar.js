@@ -1,4 +1,3 @@
-import { Tooltip } from '@mui/material';
 import React, { useContext } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -41,10 +40,13 @@ const Navbar = () => {
                         {menuItem}
                     </ul>
                 </div>
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white">
-                    <img src="kitchen-food.png" alt="" />
-                </div>
-                <Link className="btn btn-ghost normal-case text-xl">Kitchen Food</Link>
+
+                <Link to='/' className="btn btn-ghost normal-case text-xl">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white">
+                        <img src="kitchen-food.png" alt="" />
+                    </div>
+                    Kitchen Food
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
@@ -57,7 +59,7 @@ const Navbar = () => {
                         {
                             user.photoURL ?
                                 <img className='w-12 rounded-full' src={user.photoURL} alt="" title={user?.displayName} />
-                            :
+                                :
                                 <FaUserAlt className='text-4xl border-2 p-1 rounded-full' title={user?.displayName}></FaUserAlt>
                         }
                         <p><button className='btn btn-ghost hidden md:block' onClick={handleLogOut}>Log Out</button></p>

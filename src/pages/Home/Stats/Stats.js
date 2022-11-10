@@ -1,5 +1,4 @@
 import React from 'react';
-import { GrDeliver } from "react-icons/gr";
 
 const Stats = () => {
     return (

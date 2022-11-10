@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import useTitle from '../../hooks/UseTitle';
 
 const Register = () => {
     const { signUp, profileUpdate } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     useTitle('Register');
 
     const handleSubmit = event => {
@@ -16,15 +19,30 @@ const Register = () => {
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, photoURL, email, password);
 
         signUp(email, password)
             .then(result => {
                 const user = result.user;
                 profileUpdate(name, photoURL)
-                    .then(() => console.log('Profile updated'))
+                    .then(() => {})
                     .catch(e => console.error(e))
                 toast.success('Registration Successful.')
+                const currentUser = {
+                    email: user.email
+                }
+
+                fetch('https://kitchen-food-server-siamcse.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('kitchen-token', data.token);
+                        navigate(from, { replace: true });
+                    })
             })
             .catch(e => console.error(e))
 

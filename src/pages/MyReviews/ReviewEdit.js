@@ -8,22 +8,20 @@ const ReviewEdit = () => {
     const { _id, name, rating, image, comment } = useLoaderData();
 
     const onSubmit = data => {
-        console.log(data);
-        fetch(`http://localhost:5000/review/${_id}`,{
+        fetch(`https://kitchen-food-server-siamcse.vercel.app/review/${_id}`, {
             method: 'PATCH',
-            headers:{
+            headers: {
                 'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
             },
             body: JSON.stringify(data)
         })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-            if (data.modifiedCount){
-                toast.success('Modify successful.');
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    toast.success('Modify successful.');
+                }
+            })
     }
     return (
         <div className='lg:w-3/4 max-w-screen-xl mx-auto my-12'>

@@ -12,7 +12,7 @@ const Reviews = () => {
     useTitle('My Reviews')
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
+        fetch(`https://kitchen-food-server-siamcse.vercel.app/reviews?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
             }
@@ -30,22 +30,23 @@ const Reviews = () => {
     }, [user?.email, refresh, logOut])
 
     const handleDelete = id => {
-        console.log(id);
-        fetch(`http://localhost:5000/reviews/${id}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.acknowledged) {
-                    setRefresh(!refresh);
-                    toast.success('Successfully deleted!');
-                    setLoading(false);
+        const agree = window.confirm('Are you sure to delete this review?');
+        if (agree) {
+            fetch(`https://kitchen-food-server-siamcse.vercel.app/reviews/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
                 }
             })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        setRefresh(!refresh);
+                        toast.success('Successfully deleted!');
+                        setLoading(false);
+                    }
+                })
+        }
     }
 
 

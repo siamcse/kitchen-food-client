@@ -7,7 +7,7 @@ const ShowReviews = ({ refresh, id }) => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews/${id}`)
+        fetch(`https://kitchen-food-server-siamcse.vercel.app/reviews/${id}`)
             .then(res => res.json())
             .then(data => {
                 setReviews(data);

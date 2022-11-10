@@ -8,10 +8,9 @@ const AddServices = () => {
     useTitle('Add Service');
 
     const onSubmit = data => {
-        console.log(data);
-        fetch(`http://localhost:5000/services`,{
-            method:'POST',
-            headers:{
+        fetch(`https://kitchen-food-server-siamcse.vercel.app/services`, {
+            method: 'POST',
+            headers: {
                 'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('kitchen-token')}`
             },
@@ -19,10 +18,9 @@ const AddServices = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                if (data.acknowledged){
+                if (data.acknowledged) {
                     Swal.fire(
-                        'Good job!',
+                        'Good!',
                         'Service added Successfully!',
                         'success'
                     )
@@ -58,12 +56,12 @@ const AddServices = () => {
                         <input className="input input-bordered w-full lg:max-w-xl" placeholder='PhotoURL' {...register("image", { required: true })} />
                     </div>
                 </div>
-                    <div>
-                        <label className="label">
-                            <span className="label-text">Description</span>
-                        </label>
+                <div>
+                    <label className="label">
+                        <span className="label-text">Description</span>
+                    </label>
                     <textarea className="input input-bordered w-full h-24" placeholder='Description' {...register("description", { required: true })} />
-                    </div>
+                </div>
 
 
                 <input className='btn btn-secondary w-full my-6' type="submit" />

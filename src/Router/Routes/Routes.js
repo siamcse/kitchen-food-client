@@ -28,8 +28,8 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/services/:id',
-                element:<ServiceDetails></ServiceDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+                element: <ServiceDetails></ServiceDetails>,
+                loader: ({ params }) => fetch(`https://kitchen-food-server-siamcse.vercel.app/services/${params.id}`)
             },
             {
                 path: '/login',
@@ -45,15 +45,15 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/myreviews',
-                element: <PrivateRoutes><Reviews/></PrivateRoutes>
+                element: <PrivateRoutes><Reviews /></PrivateRoutes>
             },
             {
-                path:'/review/:id',
+                path: '/review/:id',
                 element: <ReviewEdit></ReviewEdit>,
-                loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`)
+                loader: ({ params }) => fetch(`https://kitchen-food-server-siamcse.vercel.app/review/${params.id}`)
             },
             {
-                path:'/blog',
+                path: '/blog',
                 element: <Blog></Blog>
             }
         ]

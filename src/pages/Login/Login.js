@@ -14,7 +14,7 @@ const Login = () => {
 
     const from = location.state?.from?.pathname || '/';
 
-    const handleSubmit = event =>{
+    const handleSubmit = event => {
         event.preventDefault();
 
         const form = event.target;
@@ -24,38 +24,51 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                const currentUser ={
+                const currentUser = {
                     email: user.email
                 }
-                console.log(currentUser);
 
-                fetch('http://localhost:5000/jwt',{
+                fetch('https://kitchen-food-server-siamcse.vercel.app/jwt', {
                     method: 'POST',
-                    headers:{
-                        'content-type':'application/json'
+                    headers: {
+                        'content-type': 'application/json'
                     },
                     body: JSON.stringify(currentUser)
                 })
-                .then(res=>res.json())
-                .then(data=>{
-                    console.log(data);
-                    toast.success('Login Successfully.')
-                    localStorage.setItem('kitchen-token',data.token);
-                    navigate(from, {replace:true});
-                })
+                    .then(res => res.json())
+                    .then(data => {
+                        toast.success('Login Successfully.')
+                        localStorage.setItem('kitchen-token', data.token);
+                        navigate(from, { replace: true });
+                    })
 
             })
             .catch(e => console.error(e))
     }
-    const googleSignIn=()=>{
+    const googleSignIn = () => {
         popupSignIn(googleProvider)
-        .then(result=>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(e=>console.error(e))
+            .then(result => {
+                const user = result.user;
+                const currentUser = {
+                    email: user.email
+                }
+
+                fetch('https://kitchen-food-server-siamcse.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        toast.success('Login Successfully.')
+                        localStorage.setItem('kitchen-token', data.token);
+                        navigate(from, { replace: true });
+                    })
+            })
+            .catch(e => console.error(e))
     }
-    
     return (
         <div className='flex items-center justify-center my-12'>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-base-200 text-gray-900">
@@ -75,6 +88,7 @@ const Login = () => {
                     <button type='submit' className="block w-full p-3 text-center rounded-md text-white btn-secondary">Sign in</button>
                 </form>
                 <div className="flex items-center pt-4 space-x-1">
+
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
                     <p className="px-3 text-sm dark:text-gray-600">Login with social accounts</p>
                     <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>

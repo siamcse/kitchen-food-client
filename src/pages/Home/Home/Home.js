@@ -14,7 +14,7 @@ const Home = () => {
     const size = 3;
 
     useEffect(() => {
-        fetch(`http://localhost:5000/services?size=${size}`)
+        fetch(`https://kitchen-food-server-siamcse.vercel.app/services?size=${size}`)
             .then(res => res.json())
             .then(data => {
                 setServices(data.services);
@@ -23,7 +23,7 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        fetch('http://localhost:5000/speciality')
+        fetch('https://kitchen-food-server-siamcse.vercel.app/speciality')
             .then(res => res.json())
             .then(data => {
                 setSpeciality(data);
@@ -36,15 +36,15 @@ const Home = () => {
         <div className='lg:max-w-screen-xl mx-auto'>
             <Banner></Banner>
             {
-            loading ? <div className='flex justify-center items-center h-96'>
-                <p className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-secondary"></p>
-            </div>
-            :
-            <div>
-                <h2 className='text-4xl font-medium mt-12 mb-2 pl-2'>My Services</h2>
-                <p className=' mb-4 px-2'>I try my best for my service quality to do better.</p>
-            </div>
-}
+                loading ? <div className='flex justify-center items-center h-96'>
+                    <p className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-secondary"></p>
+                </div>
+                    :
+                    <div>
+                        <h2 className='text-4xl font-medium mt-12 mb-2 pl-2'>My Services</h2>
+                        <p className=' mb-4 px-2'>I try my best for my service quality to do better.</p>
+                    </div>
+            }
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
                     services.map(service => <ServiceCard
