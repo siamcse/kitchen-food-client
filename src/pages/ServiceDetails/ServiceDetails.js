@@ -23,7 +23,7 @@ const ServiceDetails = () => {
                     <p>{description}</p>
                     <div className="card-actions justify-between">
                         <div className="flex gap-1">
-                            <Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly />
+                            <Rating name="half-rating-read" defaultValue={Number(rating)} precision={0.5} readOnly />
                             <p>{rating}</p>
                         </div>
                         <button className="btn btn-secondary">Order</button>
