@@ -41,6 +41,9 @@ const Navbar = () => {
                         {menuItem}
                     </ul>
                 </div>
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white">
+                    <img src="kitchen-food.png" alt="" />
+                </div>
                 <Link className="btn btn-ghost normal-case text-xl">Kitchen Food</Link>
             </div>
             <div className="navbar-center hidden lg:flex">

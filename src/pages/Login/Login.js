@@ -1,5 +1,6 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import useTitle from '../../hooks/UseTitle';
@@ -38,6 +39,7 @@ const Login = () => {
                 .then(res=>res.json())
                 .then(data=>{
                     console.log(data);
+                    toast.success('Login Successfully.')
                     localStorage.setItem('kitchen-token',data.token);
                     navigate(from, {replace:true});
                 })

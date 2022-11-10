@@ -54,7 +54,7 @@ const Reviews = () => {
 
             {
                 loading ? <div className='flex justify-center items-center h-96'>
-                    <p className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></p>
+                    <p className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-secondary"></p>
                 </div>
                     :
                     <h2 className='text-4xl font-bold text-center my-12' > My Reviews: {myReviews.length}</h2>
